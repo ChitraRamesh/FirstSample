@@ -1,73 +1,282 @@
 <html>
-  <style>
-  </style>
+    <link href='http://fonts.googleapis.com/css?family=Century+Gothic' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Syncopate' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 
- <form name = "PrimeForm">
- <fieldset>
-    <legend>PrimeNumberCheck</legend>
-   <b> Type the number to Check </b>
-    <input type="number" name="primenumber">
-    <input type="button" name="primenumberbutton" value="Check if Prime " onclick = "CheckPrime()">
-    <br> The number is
-  <b> <output   id="myOutput" name="x" > </b>
-  </fieldset>
- </form>
-
- <form name = SecondForm>
- <fieldset name="myField"> 
-    <legend>This is for test only</legend>
-    Type the number to Check
-    <input type="number" name="primenumber">
-    <input type="button" name="primenumberbutton" value="Check if Prime " onclick = "CheckPrime()">
-
-  </fieldset>
-  </form>
- </form>
- 
- <script>
- function CheckPrime()
- {
- 	document.SecondForm.myField.type = "hidden";
- 	 var numberToCheck = document.PrimeForm.primenumber.value;
- 	 console.log(numberToCheck);
-
- 	//sets number to 1; if number is less than or equal to 1000...; add 1 to number
-		 
-			number = numberToCheck;
-			document.PrimeForm.myOutput.value = "Not Prime";
-			//if number mod 2 has a remainder (is odd)...
-			if (number % 2 != 0)
-			{
-				console.log ("not divisible by two");
-				var prime = 2;
-				//set prime to 2; if prime is less than or equal to number...; add 1 to prime
-				for ( prime = 2; prime <= number; prime++)
-				{
-					//if number mod prime has the remainder of 0 (so it is divisible/not prime)...
-	        		if (number % prime == 0)
-	        		{
-	        			console.log(prime);
-	        			//document.PrimeForm.result.value = "Not a Prime";
-	        			document.PrimeForm.myOutput.value = "Not Prime";
-	        			//jumps out of loop
-	        			break;
-	        		}
-	        		
-		    	}
-		    	//if prime equals number minus 1 (it got to the last number that a prime number can't be divisible by)(the number is prime)...
-	        		 
-		    	if	(prime = number )
-	        		{
-	        			// document.PrimeForm.result.value = "Prime";
-	        			 document.PrimeForm.myOutput.value = "Prime";
-	        			 console.log(prime);
-	        		}
-			}
-			else
-			console.log ("divisible by two");
-
-		 
+<style>
+	.hidden
+	{
+		display: none;
 	}
- 
- </script>
-</html
+	button
+	{
+		width: 200px;
+		height: 200px;
+		font-family: 'Century Gothic';
+		font-size: 25px;
+		display: inline;
+	}
+	legend
+	{
+		font-family: 'Syncopate';
+		font-size: 18px;
+		font-weight: bold;
+	}
+	form
+	{
+		float: middle;
+		font-family: 'Raleway';
+	}
+	fieldset
+	{
+		display: inline;
+	}
+	.mint
+	{
+		background-color: #85FFAD;
+	}
+	.blue
+	{
+		background-color: #B3FFFF;
+	}
+	.lavender
+	{
+		background-color: #E0A3FF;
+	}
+	.rose
+	{
+		background-color: #FF9999;
+	}
+    button:hover {
+        text-decoration: underline;
+    }	
+</style>
+
+	<div align = 'center'>
+		<button class = 'mint' onclick = palButton()> Palindrome </button>
+		<button class = 'blue' onclick = dupButton()> Duplicates </button>
+		<button class = 'lavender' onclick = primeButton()> Prime </button>
+		<button class = 'rose' onclick = divButton()> Divisible </button>
+	<div>
+	<br> <br>
+
+	<form name = "pal" class = "hidden">
+		<fieldset>
+			<legend> Palindrome </legend>
+			Is <input type = "text" name = "palInp"> a Palindrome?
+			<input type = "button" onclick = palindrome() value = "Check">
+			<br>
+			<br>
+			<output id = "palResult">
+		</fieldset>
+	</form>
+
+	<form name = "dup" class = "hidden">
+		<fieldset>
+			<legend> Duplicate Letters </legend>
+			What letters are duplicated in the word <input type = "text" name = "dupInp"> ?
+			<input type = "button" onclick = duplicates() value = "Check">
+			<br>
+			<br>
+			<output id = "dupResult">
+		</fieldset>
+	</form>
+
+	<form name = "prime" class = "hidden">
+		<fieldset>
+			<legend> Prime </legend>
+			Is <input type = "number" name = "primeInp"> a prime number?
+			<input type = "button" onclick = primeNumber() value = "Check">
+			<br>
+			<br>
+			<output id = "primeResult">
+		</fieldset>
+	</form>
+
+	<form name = "div" class = "hidden">
+		<fieldset>
+			<legend> Divisible </legend>
+			Is <input type = "number" name = "divInp1"> divisible by
+			<input type = "number" name = "divInp2"> ?
+			<input type = "button" onclick = divisible() value = "Check">
+			<br>
+			<br>
+			<output id = "divResult">
+	</form>
+
+<script>
+//document.form.thing.type = "hidden";
+	function palButton()
+	{
+		document.dup.className = "hidden";		
+		document.prime.className = "hidden";		
+		document.div.className = "hidden";		
+		document.pal.className -= "hidden";
+		document.pal.palInp.value = "";
+		document.pal.palResult.value = "";
+	}
+
+	function dupButton()
+	{
+		document.pal.className = "hidden";		
+		document.prime.className = "hidden";		
+		document.div.className = "hidden";		
+		document.dup.className -= "hidden";
+		document.dup.dupInp.value = "";
+		document.dup.dupResult.value = "";
+	}
+
+	function primeButton()
+	{
+		document.pal.className = "hidden";		
+		document.dup.className = "hidden";		
+		document.div.className = "hidden";		
+		document.prime.className -= "hidden";
+		document.prime.primeInp.value = "";
+		document.prime.primeResult.value = "";
+	}
+
+	function divButton()
+	{
+		document.pal.className = "hidden";		
+		document.dup.className = "hidden";		
+		document.prime.className = "hidden";		
+		document.div.className -= "hidden";
+		document.div.divInp1.value = "";
+		document.div.divInp2.value = "";
+		document.div.divResult.value = "";
+	}
+	
+	//if characters are reversed and are the same then it is palindrome
+	function palindrome()
+	{
+		//sets word to string the user inputs
+		var word = document.pal.palInp.value
+		//turns string into array (at each character), reverses values, turns array into string (at each value)
+		var backward = word.split("").reverse().join("");
+
+		//if normal word is equal to word backwards (palindrome)...
+		if (word == backward)
+		{
+			document.pal.palResult.value = "palindrome";
+		}
+		else
+		{
+			document.pal.palResult.value = "not palindrome";
+		}
+		setInterval(function(){colPal()},1000);
+	}
+
+	function duplicates()
+	{
+		var word = document.dup.dupInp.value;
+		var length = word.length
+		//changes string to all uppercase and then turns into an array
+		var array = word.toUpperCase().split("");
+		//makes new array
+		var checkarray = [];
+		//makes the answer box blank
+		document.dup.dupResult.value = "";
+
+		for (var position = 0; position < length; position++)
+		{
+			//if the element in the array at this position is not in the other array (checks if letter has been done before)
+			if (checkarray.indexOf(array[position]) < 0)
+			{
+				var counter = 1;
+				for (var check = position + 1; check < length; check++)
+				{
+					//if the element is the same as the other letter in the array (that it is checking right now)...
+					if (array[position] == array[check])
+					{
+						counter++;
+					}
+				}
+				//adds element that was just checked to other array
+				checkarray.push(array[position]);
+				if (counter > 1)
+				{
+					document.dup.dupResult.value += array[position] + " - " + counter + ". ";
+				}
+			}
+		}
+		setInterval(function(){colDup()},1000);
+	}
+
+	function primeNumber()
+	{
+		var number = document.prime.primeInp.value;
+		//if number mod 2 has a remainder (is odd)...
+		if (number % 2)
+		{
+			//set prime to 2; if prime is less than or equal to number...; add 1 to prime
+			for (var prime = 2; prime < number; prime++)
+			{
+				//if number mod prime has the remainder of 0 (so it is divisible/not prime)...
+	       		if (number % prime === 0)
+	       		{
+					document.prime.primeResult.value = "not prime";
+	       			//jumps out of loop
+	       			break;
+	       		}
+	       		//if prime equals number minus 1 (it got to the last number that a prime number can't be divisible by)(the number is prime)...
+	        	else if	(prime === number - 1)
+	        	{
+					document.prime.primeResult.value = "prime";
+	        	}
+		    }
+		}
+		//if number is even
+		else
+		{
+			document.prime.primeResult.value = "not prime";
+		}
+		setInterval(function(){colPrime()},1000);
+	}
+
+	function divisible()
+	{
+		var num1 = document.div.divInp1.value;
+		var num2 = document.div.divInp2.value;
+
+		if (num1 % num2 == 0)
+		{
+			document.div.divResult.value = "Yes";
+		}
+		else
+		{
+			var remainder = num1 % num2;
+			document.div.divResult.value = "No, " + num1 + " / " + num2 + " has a remainder of " + remainder;			
+		}
+		setInterval(function(){colDiv()},1000);
+	}
+
+	function colPal()
+	{
+		var color = ["red", "orange", "green", "blue", "purple", "pink"];
+		var rand = color[Math.floor(Math.random() * color.length)];
+		document.pal.palResult.style.color = rand;
+	}
+
+	function colDup()
+	{
+		var color = ["red", "orange", "green", "blue", "purple", "pink"];
+		var rand = color[Math.floor(Math.random() * color.length)];
+		document.dup.dupResult.style.color = rand;
+	}
+
+	function colPrime()
+	{
+		var color = ["red", "orange", "green", "blue", "purple", "pink"];
+		var rand = color[Math.floor(Math.random() * color.length)];
+		document.prime.primeResult.style.color = rand;
+	}	
+
+	function colDiv()
+	{
+		var color = ["red", "orange", "green", "blue", "purple", "pink"];
+		var rand = color[Math.floor(Math.random() * color.length)];
+		document.div.divResult.style.color = rand;
+	}		
+</script>
+</html>
